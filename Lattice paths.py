@@ -3,24 +3,19 @@
 
 # 对于20×20方阵来说，这样的路径有多少条？
 
-lists = []
-def lattice(data):
-    if data[len(data)-1]['x'] == 3 and data[len(data)-1]['y'] == 3:
-        lists.append(data)
-    else:
-        if data[len(data)-1]['x'] != 3:
-            data.append({
-                'x': data[len(data)-1]['x'] + 1,
-                'y': data[len(data)-1]['y']
-            })
-            lattice(data)
+def test(lists):
+  newlist = []
+  index = False
+  for i in lists:
+    if i['x'] != 20:
+      newlist.append({'x': i['x']+1,'y': i['y']})
+    if i['y'] != 20:
+      newlist.append({'x': i['x'],'y': i['y']+1})
+    if i['x'] == 20 and i['y'] == 20:
+      index = True
+  if index:
+    print(len(lists))
+  else:
+    test(newlist)
 
-        if data[len(data)-1]['y'] != 3:
-            data.append({
-                'x': data[len(data)-1]['x'],
-                'y': data[len(data)-1]['y'] + 1
-            })
-            lattice(data)
-
-lattice([{'x':0, 'y':0}])
-print(lists)
+test([{'x': 0,'y': 0}])
